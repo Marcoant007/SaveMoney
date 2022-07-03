@@ -1,10 +1,14 @@
 package com.example.savemoney.services;
 
+import java.util.List;
+
 import javax.management.ServiceNotFoundException;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.savemoney.dtos.UserDTO;
 import com.example.savemoney.models.users.User;
@@ -22,6 +26,13 @@ public class UserService {
             transformDTOInEntity(userDTO, userEntity);
             userEntity = userRepository.save(userEntity);
             return new UserDTO(userEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDTO> listAllUsers(PageRequest pageRequest){
+        Page<User> usersList = userRepository.findAll(pageRequest);
+        Page<UserDTO> userDTO = usersList.map(userObject -> new UserDTO(userObject));
+        return userDTO;
     }
 
 
