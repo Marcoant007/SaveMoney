@@ -58,6 +58,8 @@ public class UserService {
         }
     }
 
+
+    @Transactional
     public void delete(Long id){
         try {
             userRepository.deleteById(id);
@@ -68,13 +70,11 @@ public class UserService {
         }
     }
 
-
-
     public void transformDTOInEntity(UserDTO userDTO, User userEntity){
         userEntity.setName(userDTO.getName());
         userEntity.setCpf(userDTO.getCpf());
+        userEntity.setEmail(userDTO.getEmail());
         userEntity.setIncome(userDTO.getIncome());
         userEntity.setBirthDate(userDTO.getBirthDate());
-        userEntity.setPassword(userDTO.getPassword());
     }
 }

@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "tb_user")
@@ -24,10 +23,12 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String name;
-
+    
     private String cpf;
+  
+    private String email;
 
     private Double income;
 
@@ -46,11 +47,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String name, String cpf, Double income, String password,  Instant birthDate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String name, String cpf, Double income, String password,  Instant birthDate, LocalDateTime createdAt, LocalDateTime updatedAt, String email) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.income = income;
+        this.email = email;
         this.password = password;
         this.birthDate = birthDate;
         this.createdAt = createdAt;
@@ -122,6 +124,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -130,12 +140,13 @@ public class User implements Serializable {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(cpf, user.cpf) && Objects.equals(income, user.income) && Objects.equals(birthDate, user.birthDate) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(cpf, user.cpf) && Objects.equals(email, user.email) && Objects.equals(income, user.income) && Objects.equals(password, user.password) && Objects.equals(birthDate, user.birthDate) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, cpf, income, birthDate, createdAt, updatedAt);
+        return Objects.hash(id, name, cpf, email, income, password, birthDate, createdAt, updatedAt);
     }
+
 
 }

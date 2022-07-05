@@ -3,6 +3,8 @@ package com.example.savemoney.controllers;
 import java.net.URI;
 import java.security.Provider.Service;
 
+import javax.validation.Valid;
+
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,14 +51,14 @@ public class UserController {
     }
     
     @PostMapping()
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO){
         userDTO = userService.createUser(userDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(userDTO);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> updatedUser(@PathVariable Long id, @RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> updatedUser(@Valid @PathVariable Long id, @RequestBody UserDTO userDTO){
         userDTO = userService.updatedUser(id, userDTO);
         return ResponseEntity.ok().body(userDTO);
     }

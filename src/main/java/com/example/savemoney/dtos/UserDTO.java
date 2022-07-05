@@ -3,26 +3,40 @@ package com.example.savemoney.dtos;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.example.savemoney.models.users.User;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long id;
+
+    @Size(min = 5, max = 60, message = "O nome deve conter no minimo 5 caracteres e no máximo 60")
+    @NotBlank(message = "Campo requerido")
     private String name;
+
+    @NotBlank(message = "Campo obrigatório")
     private String cpf;
+    
     private Double income;
+
+    @Email(message = "Favor colocar um email válido")
+    private String email;
+
     private Instant birthDate;
-    private String password;
 
   
     public UserDTO(User userEntity) {
         this.id = userEntity.getId();
         this.name = userEntity.getName();
         this.cpf = userEntity.getCpf();
+        this.email = userEntity.getEmail();
         this.income = userEntity.getIncome();
         this.birthDate = userEntity.getBirthDate();
-        this.password = userEntity.getPassword();
     }
 
 
@@ -69,11 +83,11 @@ public class UserDTO implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public String getPassword() {
-        return this.password;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
