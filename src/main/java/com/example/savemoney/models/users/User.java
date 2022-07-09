@@ -28,6 +28,7 @@ public class User implements Serializable {
     
     private String cpf;
   
+    @Column(unique = true)
     private String email;
 
     private Double income;
@@ -147,6 +148,4 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name, cpf, email, income, password, birthDate, createdAt, updatedAt);
     }
-
-
 }

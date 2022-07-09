@@ -16,6 +16,7 @@ import com.example.savemoney.services.exceptions.ServiceNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandle {
+   
     @ExceptionHandler(ServiceNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(ServiceNotFoundException exception, HttpServletRequest request){
         StandardError error = new StandardError();
@@ -56,19 +57,6 @@ public class ControllerExceptionHandle {
 
         return ResponseEntity.status(status).body(error);
     }
-    
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<StandardError> ilegalArgument(IllegalArgumentException exception, HttpServletRequest request){
-        StandardError error = new StandardError();
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        error.setTimestamp(Instant.now());
-        error.setStatus(status.value());
-        error.setError("Ilegal Argument Exception");
-        error.setMessage(exception.getMessage());
-        error.setPath(request.getRequestURI());
-        return ResponseEntity.status(status).body(error);
-    }
 
     // @ExceptionHandler(AmazonServiceException.class)
     // public ResponseEntity<StandardError> amazonService(AmazonServiceException exception, HttpServletRequest request){
@@ -93,5 +81,16 @@ public class ControllerExceptionHandle {
     //     error.setPath(request.getRequestURI());
     //     return ResponseEntity.status(status).body(error);
     // }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardError> ilegalArgument(IllegalArgumentException exception, HttpServletRequest request){
+        StandardError error = new StandardError();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Ilegal Argument Exception");
+        error.setMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
     
 }

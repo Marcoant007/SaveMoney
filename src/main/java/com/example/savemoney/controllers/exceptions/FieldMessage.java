@@ -3,19 +3,20 @@ package com.example.savemoney.controllers.exceptions;
 import java.io.Serializable;
 
 public class FieldMessage implements Serializable {
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; 
 
     private String fieldName;
-    private String mesage;
+    private String message;
 
-    public FieldMessage(){
+    public FieldMessage() {
     }
 
-    public FieldMessage(String fieldName, String mesage) {
+    public FieldMessage(String fieldName, String message) {
         this.fieldName = fieldName;
-        this.mesage = mesage;
+        this.message = message;
     }
 
+    
     public String getFieldName() {
         return this.fieldName;
     }
@@ -24,11 +25,11 @@ public class FieldMessage implements Serializable {
         this.fieldName = fieldName;
     }
 
-    public String getMesage() {
-        return this.mesage;
+    public String getMessage() {
+        return this.message;
     }
 
-    public void setMesage(String mesage) {
-        this.mesage = mesage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
