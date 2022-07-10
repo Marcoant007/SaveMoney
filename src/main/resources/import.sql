@@ -9,3 +9,16 @@
 -- INSERT INTO tb_user (name, cpf, birth_date, income, children) VALUES ('Karol Calis', '17816783752', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z',  8000, 0);
 -- INSERT INTO tb_user (name, cpf, birth_date, income, children) VALUES ('Sentinel ', '17816783752', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z',  13000, 1);
 -- INSERT INTO tb_user (name, cpf, birth_date, income, children) VALUES ('Sasuke', '17816783752', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z',  123000, 1);
+
+-- INSERT INTO tb_user (name, cpf, birth_date, income, password) VALUES ('Sasuke', '17816783752', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z', 123000, "mordekai07");
+
+INSERT INTO tb_user (name, cpf, email, password, birthDate, income ) VALUES ('Marco Antonio', '17816783752', 'marcoantnovo@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z', 4000);
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 2);
+-- INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+-- INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
+-- INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);

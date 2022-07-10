@@ -2,6 +2,8 @@ package com.example.savemoney.dtos;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
@@ -29,6 +31,18 @@ public class UserDTO implements Serializable {
 
     private Instant birthDate;
 
+    Set<RoleDTO> roles = new HashSet<>();
+    
+
+    public UserDTO(long id, String name, String cpf, Double income, String email, Instant birthDate, Set<RoleDTO> roles) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.income = income;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.roles = roles;
+    }
   
     public UserDTO(User userEntity) {
         this.id = userEntity.getId();
@@ -37,8 +51,8 @@ public class UserDTO implements Serializable {
         this.email = userEntity.getEmail();
         this.income = userEntity.getIncome();
         this.birthDate = userEntity.getBirthDate();
+        userEntity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
     }
-
 
     public UserDTO() {
     }
@@ -89,5 +103,14 @@ public class UserDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public Set<RoleDTO> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
     }
 }

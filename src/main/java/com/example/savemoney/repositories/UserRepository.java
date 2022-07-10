@@ -10,5 +10,5 @@ import com.example.savemoney.models.users.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
 }

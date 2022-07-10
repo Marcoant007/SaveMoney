@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.savemoney.dtos.UserDTO;
+import com.example.savemoney.dtos.UserInsertDTO;
 import com.example.savemoney.services.UserService;
 
 @RestController
@@ -28,7 +29,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
 
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAll(
@@ -48,10 +48,10 @@ public class UserController {
     }
     
     @PostMapping()
-    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO){
-        userDTO = userService.createUser(userDTO);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserInsertDTO userDTO){
+        UserDTO newUserDto = userService.createUser(userDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(userDTO);
+        return ResponseEntity.created(uri).body(newUserDto);
     }
 
     @PutMapping(value = "/{id}")
