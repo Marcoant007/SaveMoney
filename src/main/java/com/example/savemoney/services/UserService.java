@@ -1,6 +1,5 @@
 package com.example.savemoney.services;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -17,9 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.example.savemoney.dtos.RoleDTO;
 import com.example.savemoney.dtos.UserDTO;
 import com.example.savemoney.dtos.UserInsertDTO;
+import com.example.savemoney.models.users.Role;
 import com.example.savemoney.models.users.User;
+import com.example.savemoney.repositories.RoleRepository;
 import com.example.savemoney.repositories.UserRepository;
 import com.example.savemoney.services.exceptions.DatabaseException;
 import com.example.savemoney.services.exceptions.ServiceNotFoundException;
@@ -34,6 +37,9 @@ public class UserService implements UserDetailsService{
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Transactional
     public UserDTO createUser(UserInsertDTO userDTO){
@@ -87,6 +93,11 @@ public class UserService implements UserDetailsService{
         userEntity.setEmail(userDTO.getEmail());
         userEntity.setIncome(userDTO.getIncome());
         userEntity.setBirthDate(userDTO.getBirthDate());
+        userEntity.getRoles().clear();
+        for(RoleDTO roleDTO : userDTO.getRoles()){
+            Role role = roleRepository.getOne(roleDTO.getId());
+            userEntity.getRoles().add(role);
+        }
     }
 
     @Override

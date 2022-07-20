@@ -12,7 +12,7 @@
 
 -- INSERT INTO tb_user (name, cpf, birth_date, income, password) VALUES ('Sasuke', '17816783752', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z', 123000, "mordekai07");
 
-INSERT INTO tb_user (name, cpf, email, password, birthDate, income ) VALUES ('Marco Antonio', '17816783752', 'marcoantnovo@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z', 4000);
+INSERT INTO tb_user (name, cpf, email, password, birth_date, income) VALUES ('Marco Antonio', '17816783752', 'marcoantnovo@gmail.com', '$2a$12$KsMFLUvs5IgW26NApQNg6eJJm7oCASG1ew7q34hBBdl0wWiAfTdMe', TIMESTAMP WITH TIME ZONE '1998-02-27T10:00:00Z', 4000.00);
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
